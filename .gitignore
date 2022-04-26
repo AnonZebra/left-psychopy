@@ -1,0 +1,8 @@
+*_lastrun.py
+**/data/
+.DS_Store
+*.swp
+left-in-scanner.py
+left-outside-scanner.py
+left-demo.py
+instruction-demo/demo_data
