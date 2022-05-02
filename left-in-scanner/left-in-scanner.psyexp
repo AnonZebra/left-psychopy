@@ -9,7 +9,7 @@
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
     <Param val="{'participant': ''}" valType="code" updates="None" name="Experiment info"/>
     <Param val="True" valType="bool" updates="None" name="Force stereo"/>
-    <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
+    <Param val="False" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="html" valType="str" updates="None" name="HTML path"/>
     <Param val="" valType="str" updates="None" name="Incomplete URL"/>
     <Param val="testMonitor" valType="str" updates="None" name="Monitor"/>
@@ -25,7 +25,7 @@
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
     <Param val="deg" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
-    <Param val="[1280, 800]" valType="code" updates="None" name="Window size (pixels)"/>
+    <Param val="[1680, 1050]" valType="code" updates="None" name="Window size (pixels)"/>
     <Param val="avg" valType="str" updates="None" name="blendMode"/>
     <Param val="$[0,0,0]" valType="str" updates="None" name="color"/>
     <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
@@ -44,7 +44,7 @@
     <Param val="None" valType="str" updates="None" name="eyetracker"/>
     <Param val="127.0.0.1" valType="str" updates="None" name="gpAddress"/>
     <Param val="4242" valType="num" updates="None" name="gpPort"/>
-    <Param val="ioHub" valType="str" updates="None" name="keyboardBackend"/>
+    <Param val="PsychToolbox" valType="str" updates="None" name="keyboardBackend"/>
     <Param val="debug" valType="code" updates="None" name="logging level"/>
     <Param val="('MIDDLE_BUTTON',)" valType="list" updates="None" name="mgBlink"/>
     <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
@@ -323,7 +323,7 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <CodeComponent name="code">
+      <CodeComponent name="code_setup">
         <Param val="###SET EXPERIMENT CONSTANTS###&amp;#10;# trial image width/height size (in deg)&amp;#10;IMAGE_SIZE = 7&amp;#10;&amp;#10;# vertical offset of trial images from central horizontal line&amp;#10;# (in deg)&amp;#10;VERTICAL_OFFSET = 3.75&amp;#10;# horizontal offset of (context) trial images from central&amp;#10;# vertical line (in deg)&amp;#10;HORIZONTAL_OFFSET = 5&amp;#10;&amp;#10;# medium text size&amp;#10;MID_TXTSIZE = 0.6&amp;#10;&amp;#10;# demonstration found/not found messages&amp;#10;NOTFOUND_TXT = 'Formen fanns här. Tryck höger knapp.'&amp;#10;FOUND_TXT = 'Precis, formen fanns här. Tryck höger knapp.'&amp;#10;&amp;#10;# keyboard keys (or response button signals, if they are&amp;#10;# converted to keyboard presses) that are to be interpreted&amp;#10;# as left/right responses&amp;#10;LEFT_KEY = '3'&amp;#10;RIGHT_KEY = '1'&amp;#10;# it's not allowed to enter non-tuple/list variables in&amp;#10;# keyboard response components' 'allowed keys' fields,&amp;#10;# so also specify tuples to use&amp;#10;RESPONSE_KEYS = (LEFT_KEY, RIGHT_KEY)&amp;#10;LEFTKEY_TUPLE = (LEFT_KEY,)&amp;#10;RIGHTKEY_TUPLE = (RIGHT_KEY,)&amp;#10;&amp;#10;# 'keyboard key' that MR trigger signal is&amp;#10;# converted into ('5' is commonly used)&amp;#10;MR_TRIGGERKEY_TUPLE = ('5',)&amp;#10;&amp;#10;###END SET EXPERIMENT CONSTANTS###" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="IMAGE_SIZE = 7;&amp;#10;VERTICAL_OFFSET = 3.75;&amp;#10;HORIZONTAL_OFFSET = 5;&amp;#10;MID_TXTSIZE = 0.6;&amp;#10;NOTFOUND_TXT = &quot;Formen fanns h\u00e4r. Tryck h\u00f6ger knapp.&quot;;&amp;#10;FOUND_TXT = &quot;Precis, formen fanns h\u00e4r. Tryck h\u00f6ger knapp.&quot;;&amp;#10;LEFT_KEY = &quot;3&quot;;&amp;#10;RIGHT_KEY = &quot;1&quot;;&amp;#10;RESPONSE_KEYS = [LEFT_KEY, RIGHT_KEY];&amp;#10;LEFTKEY_TUPLE = [LEFT_KEY];&amp;#10;RIGHTKEY_TUPLE = [RIGHT_KEY];&amp;#10;MR_TRIGGERKEY_TUPLE = [&quot;5&quot;];&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -338,7 +338,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="code" valType="code" updates="None" name="name"/>
+        <Param val="code_setup" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="demo_control">
