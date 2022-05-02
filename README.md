@@ -91,6 +91,8 @@ Stimuli are presented with width/height of 7° (degrees of visual angle), at a v
 
 In the 'control' trial context images, highlighted lines are colored with a light-grey color (RGB code `(150, 150, 150)`, corresponding hex code `#969696`).
 
+The 'novel' images were produced with the [leftstim package](https://github.com/AnonZebra/leftstim).
+
 ## Output data
 The most relevant output data files are the 'CSV'/'.csv' files, saved to the 'data' directory. The most important columns in these files are as follows:
 
