@@ -9,7 +9,7 @@ This is a PsychoPy implementation of a variant of the [Leuven Embedded Figures T
 * two 'context' images at the bottom of the screen
 The participant is to indicate, within a set duration, whether the target object is embedded in the left or right context image.
 
-## Different versions
+## Demo, in-scanner and outside-scanner projects
 This project includes 3 PsychoPy projects:
 * 'instruction-demo' holds an 'experiment' that is meant to be used for demonstrating the L-EFT task to participants, e.g. to prepare them for doing the test inside of an MR scanner.
     - This is a very minimal demo. No automated feedback is given to the participant; instead, it's expected that the tester will be discussing what is the correct/incorrect response with the participant before the participant actually presses a key/button to proceed.
@@ -91,7 +91,21 @@ Stimuli are presented with width/height of 7° (degrees of visual angle), at a v
 
 In the 'control' trial context images, highlighted lines are colored with a light-grey color (RGB code `(150, 150, 150)`, corresponding hex code `#969696`).
 
-The 'novel' images were produced with the [leftstim package](https://github.com/AnonZebra/leftstim).
+Apart from stimuli used in the original L-EFT, this variant also includes some rotated stimuli and some 'novel' stimuli. The 'novel' images were produced with the [leftstim package](https://github.com/AnonZebra/leftstim).
+
+Note that this variant of the L-EFT only uses stimuli that are of the 'next highest' and 'highest' difficulty levels, as described in the [original L-EFT articles](https://peerj.com/articles/2862/). This was decided on since we wanted to make sure that participants wouldn't finish trials too quickly when running the experiment during brain scanning. This is also the reason for why novel stimuli were needed.
+
+In the file 'left_context_characteristics.csv', all embedded context stimuli are described in greater detail. It includes the following columns:
+* left_path: Describes the relative filepath to the context image (corresponds to 'left_image_path' in experiment output data, see below).
+* block_type: Says what type of block ('control'/'test') the stimulus is used in.
+* target_name: Specifies what target figure is used in the trial involving the context stimulus.
+    - The names are based on the original L-EFT article - you can look in 'stimuli_left/targets' to see which figure is which, based on the filenames there.
+* rotated: Specifies whether or not the target figure is rotated in the trials involving the context stimulus. 
+* symmetrical: Specifies whether or not the target figure used in the trials involving the context stimulus is symmetrical or not.
+    - Example: The likesided triangle figure, A1, is symmetrical, while the 'incomplete triangle' figure, D1, is not.
+* hi_difficulty: Says whether the trial where the context image is used is of high difficulty (True - corresponds to 'highest difficulty level' in original L-EFT) or not (False - corresponds to 'next highest difficulty level' in original L-EFT).
+* open: Specifies whether or not the target figure is 'open', meaning not all of the figure's line endings are linked to at least two lines, in the trials involving the context stimulus. 
+    - Example: The likesided triangle figure, A1, is 'closed', while the 'jigsaw' figure, D2, is 'open'.
 
 ## Output data
 The most relevant output data files are the 'CSV'/'.csv' files, saved to the 'data' directory. The most important columns in these files are as follows:
@@ -102,6 +116,32 @@ The most relevant output data files are the 'CSV'/'.csv' files, saved to the 'da
     - Context image filenames also have suffixes that indicated whether the image is novel (otherwise, it's from the original L-EFT stimuli) and/or rotated. e.g. if 'left_image_path' is 'stimuli_left/contexts/control/010b_novel_rotated.png', this means that the trial was a 'control' trial and had novel context images where the target had been rotated.
 * key_resp_trial.corr: indicates whether participant response was 'correct', 'incorrect', or there was 'no response' (for 'baseline' blocks, this column holds a 'baseline' value).
 
+Since the experiment output data are so sparse, you will likely want to combine output CSV files with the 'left_context_characteristics.csv' file (see the 'Stimuli' section above), to add e.g. information about what target was used for each trial. You can do this for instance in the programming/statistics language [R](https://www.r-project.org/) with commands similar to the following:
+
+```r
+# read in experiment data (update file path as necessary)
+#df_expdata <- read.csv('left-in-scanner/data/id1_LeuvenEFT_2022_May_12_1432.csv')
+df_expdata <- read.csv('left-in-scanner/data/sync15_1_LeuvenEFT_2021_Aug_23_0935.csv')
+# keep only most relevant columns (update this as necessary)
+df_expdata <- df_expdata[c("left_image_path", "key_resp_trial.corr")]
+# read in context image characteristics data
+df_contextdata <- read.csv('left_context_characteristics.csv')
+
+# combine the experiment data with the context image characteristics data
+# in a single data frame, simultaneously dropping all non-trial rows in
+# the experiment data
+df_exp_extended <- merge(
+  x=df_expdata,
+  y=df_contextdata,
+  by.x='left_image_path',
+  by.y='image_path'
+)
+
+# save as new CSV file (if you want - you might instead want to use
+# the data frame directly in R, e.g. by combining multiple participants'
+# trial data)
+write.csv(df_exp_extended, 'my_participant_extended_data.csv')
+```
 
 ## (not) Running the experiment online
 This experiment was only developed for local use, i.e. not with online use in mind. Since it uses much custom Python code, it is unlikely that one could easily convert it to JavaScript for being run online. You are very welcome to try, but you might find it easier to rewrite the experiment from scratch.
