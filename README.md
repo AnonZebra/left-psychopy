@@ -114,14 +114,14 @@ The most relevant output data files are the 'CSV'/'.csv' files, saved to the 'da
     - The image shown on the right-hand side is easily deduced due to a simple naming convention for all image files. e.g. if the 'left_image_path' cell has value 'stimuli_left/contexts/test/054a.png', the right-hand side context image must have been 'stimuli_left/contexts/test/054b.png'.
     - All images are numbered in agreement with the numbering used for [the original L-EFT stimuli files on Figshare](https://figshare.com/articles/dataset/Leuven_Embedded_Figures_Test_Target_Shapes/3807885). e.g. context images numbered 12 through 15 are for trials where the target is an equilateral triangle, where the '12' images correspond to the lowest 'difficulty level', and the '15' images corresponding to the highest difficulty.
     - Context image filenames also have suffixes that indicated whether the image is novel (otherwise, it's from the original L-EFT stimuli) and/or rotated. e.g. if 'left_image_path' is 'stimuli_left/contexts/control/010b_novel_rotated.png', this means that the trial was a 'control' trial and had novel context images where the target had been rotated.
-* key_resp_trial.corr: indicates whether participant response was 'correct', 'incorrect', or there was 'no response' (for 'baseline' blocks, this column holds a 'baseline' value).
+* key_resp_trial.corr: Indicates whether participant response was 'correct', 'incorrect', or there was 'no response' (for 'baseline' blocks, this column holds a 'baseline' value).
+* key_resp_trial.rt: Response time, i.e. time in seconds from trial start until participant pressed left/right button.
 
 Since the experiment output data are so sparse, you will likely want to combine output CSV files with the 'left_context_characteristics.csv' file (see the 'Stimuli' section above), to add e.g. information about what target was used for each trial. You can do this for instance in the programming/statistics language [R](https://www.r-project.org/) with commands similar to the following:
 
 ```r
 # read in experiment data (update file path as necessary)
-#df_expdata <- read.csv('left-in-scanner/data/id1_LeuvenEFT_2022_May_12_1432.csv')
-df_expdata <- read.csv('left-in-scanner/data/sync15_1_LeuvenEFT_2021_Aug_23_0935.csv')
+df_expdata <- read.csv('left-in-scanner/data/id1_LeuvenEFT_2022_May_12_1432.csv')
 # keep only most relevant columns (update this as necessary)
 df_expdata <- df_expdata[c("left_image_path", "key_resp_trial.corr")]
 # read in context image characteristics data
